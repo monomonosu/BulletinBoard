@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Thread extends Model
+class Response extends Model
 {
     use HasFactory, \Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
     protected $fillable = [
-        'title',
+        'response_no',
         'name',
         'email',
         'content',
     ];
 
-    public function responses()
+    public function thread()
     {
-        return $this->hasMany(Response::class);
+        return $this->belongsTo(Thread::class);
     }
 }
