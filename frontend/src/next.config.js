@@ -4,4 +4,8 @@ const nextConfig = {
   swcMinify: true,
 }
 
+compiler: {
+  emotion: true
+}
+
 module.exports = nextConfig

@@ -3,6 +3,7 @@ import IndexLayout from "../styles/Index.module.css";
 import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 
 export default function Home() {
   const [threads, setThreads] = useState([]);
@@ -53,27 +54,35 @@ export default function Home() {
     });
   };
 
+  const ThreadContainer = styled.div`
+    border-radius: 3px;
+    color: white;
+    background: linear-gradient(135deg, #ffbe26 0%, #b54200 100%);
+  `;
+
+  const ResponseContainer = styled.div`
+    border-radius: 3px;
+    color: white;
+    background: linear-gradient(135deg, #afb42b 0%, #5f6900 100%);
+  `;
+
   return (
     <>
       <Layout title="スレッド一覧">
         <section>
-          <h2 className={IndexLayout.page_title}>スレッド一覧</h2>
-        </section>
-
-        <section>
-          <div className={IndexLayout.thread_container}>
+          <ThreadContainer>
             {threads.map((thread) => (
               <div key={thread.key}>
                 {thread.id}: ★{thread.title}({thread.responses_count + 1})
               </div>
             ))}
-          </div>
+          </ThreadContainer>
         </section>
 
         {threads &&
           threads.map((thread, index) => (
             <>
-              <div className={IndexLayout.response_container} key={thread.key}>
+              <ResponseContainer key={thread.key}>
                 <h3>
                   【{thread.id}:{thread.responses_count + 1}】
                   <span>{thread.title}</span>
@@ -129,7 +138,7 @@ export default function Home() {
                 <div>
                   <Link href={`/threads/${thread.id}`}>全部読む</Link>
                 </div>
-              </div>
+              </ResponseContainer>
             </>
           ))}
       </Layout>
