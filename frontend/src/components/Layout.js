@@ -1,20 +1,38 @@
-import Head from 'next/head'
-import styleLayout from '../styles/components/layout.module.css'
+import styled from "@emotion/styled";
 
 const Layout = ({ children, title }) => {
-    return (
-      <>
-        <Head>
-          <title>{title}</title>
-        </Head>
-        <div className={styleLayout.default_bg}>
-          <header>
-            <h1 className={styleLayout.title}>掲示板</h1>
-          </header>
-            <main className={styleLayout.main_container}>{children}</main>
-        </div>
-      </>
-    );
-}
+  const BaseTitle = styled.h1`
+    color: #656565;
+    margin-top: 0;
+    padding-top: 24px;
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 700;
+    text-align: center;
+  `;
 
-export default Layout
+  const BaseBackGround = styled.div`
+    min-height: 100vh;
+    background: white;
+  `;
+
+  const BaseLayout = styled.main`
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 16px;
+  `;
+  return (
+    <>
+      <BaseBackGround>
+        <header>
+          <BaseTitle>掲示板</BaseTitle>
+        </header>
+        <BaseTitle>{title}</BaseTitle>
+        <BaseLayout>{children}</BaseLayout>
+      </BaseBackGround>
+    </>
+  );
+};
+
+export default Layout;
