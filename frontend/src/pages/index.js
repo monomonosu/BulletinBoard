@@ -1,5 +1,4 @@
 import Layout from "../components/layout";
-import IndexLayout from "../styles/Index.module.css";
 import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
