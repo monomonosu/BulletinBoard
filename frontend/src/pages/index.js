@@ -1,4 +1,5 @@
 import Layout from "../components/layout";
+import BaseBox from "../components/BaseBox";
 import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -53,35 +54,21 @@ export default function Home() {
     });
   };
 
-  const ThreadContainer = styled.div`
-    border-radius: 3px;
-    color: white;
-    background: linear-gradient(135deg, #ffbe26 0%, #b54200 100%);
-  `;
-
-  const ResponseContainer = styled.div`
-    border-radius: 3px;
-    color: white;
-    background: linear-gradient(135deg, #afb42b 0%, #5f6900 100%);
-  `;
-
   return (
     <>
       <Layout title="スレッド一覧">
-        <section>
-          <ThreadContainer>
-            {threads.map((thread) => (
-              <div key={thread.key}>
-                {thread.id}: ★{thread.title}({thread.responses_count + 1})
-              </div>
-            ))}
-          </ThreadContainer>
-        </section>
+        <BaseBox beginColor={"#ffbe26"} endColor={"#b54200"}>
+          {threads.map((thread) => (
+            <div key={thread.key}>
+              {thread.id}: ★{thread.title}({thread.responses_count + 1})
+            </div>
+          ))}
+        </BaseBox>
 
         {threads &&
           threads.map((thread, index) => (
             <>
-              <ResponseContainer key={thread.key}>
+              <BaseBox beginColor={'#afb42b'} endColor={'#5f6900'} key={thread.key}>
                 <h3>
                   【{thread.id}:{thread.responses_count + 1}】
                   <span>{thread.title}</span>
@@ -137,7 +124,7 @@ export default function Home() {
                 <div>
                   <Link href={`/threads/${thread.id}`}>全部読む</Link>
                 </div>
-              </ResponseContainer>
+              </BaseBox>
             </>
           ))}
       </Layout>
