@@ -1,9 +1,9 @@
 import Layout from "../components/layout";
+import ThreadsList from "../components/ThreadsList";
 import BaseBox from "../components/BaseBox";
 import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styled from "@emotion/styled";
 
 export default function Home() {
   const [threads, setThreads] = useState([]);
@@ -57,18 +57,16 @@ export default function Home() {
   return (
     <>
       <Layout title="スレッド一覧">
-        <BaseBox beginColor={"#ffbe26"} endColor={"#b54200"}>
-          {threads.map((thread) => (
-            <div key={thread.key}>
-              {thread.id}: ★{thread.title}({thread.responses_count + 1})
-            </div>
-          ))}
-        </BaseBox>
+        <ThreadsList threads={threads} />
 
         {threads &&
           threads.map((thread, index) => (
             <>
-              <BaseBox beginColor={'#afb42b'} endColor={'#5f6900'} key={thread.key}>
+              <BaseBox
+                beginColor={"#afb42b"}
+                endColor={"#5f6900"}
+                key={thread.key}
+              >
                 <h3>
                   【{thread.id}:{thread.responses_count + 1}】
                   <span>{thread.title}</span>
