@@ -24,4 +24,6 @@ Route::get('/threads', [ThreadController::class, 'index']);
 Route::post('/threads', [ThreadController::class, 'store']);
 Route::get('/threads/{id}', [ThreadController::class, 'show']);
 
+Route::get('/thread/{id}/responses', [ResponseController::class, 'index']);
+
 Route::post('/threads/{threadId}/responses', [ResponseController::class, 'store']);
