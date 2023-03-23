@@ -4,6 +4,16 @@ import ResponseBox from "./ResponseBox";
 import Link from "next/link";
 
 const ThreadBox = ({ thread, children }) => {
+  // レスポンス一覧トップに表示する投稿主レスポンス
+  const firstResponse = {
+    id: thread.id,
+    name: thread.name,
+    content: thread.content,
+    response_no: 1,
+    created_at: thread.created_at,
+    updated_at: thread.created_at,
+  };
+
   const CustomThreadTitle = styled.h3`
     margin: 0;
     text-align: left;
@@ -15,10 +25,9 @@ const ThreadBox = ({ thread, children }) => {
           【{thread.id}:{thread.responses_count + 1}】
           <span>{thread.title}</span>
         </CustomThreadTitle>
-        <p>
-          1 名前 : <span>{thread.name}</span> : {thread.created_at}
-        </p>
-        <p>{thread.content}</p>
+
+        {/* レスポンス一覧トップには投稿主のレスを表示 */}
+        <ResponseBox response={firstResponse} />
 
         {thread.responses.map((response) => (
           <ResponseBox key={response.key} response={response} />
