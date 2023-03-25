@@ -1,23 +1,49 @@
 import axios from "axios";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import TextField from "@mui/material/TextField";
+import { useForm } from "react-hook-form";
+import { styled } from "@mui/material";
 
 const ThreadForm = (props) => {
-  const [formResponses, setFormResponses] = useState([]);
+  const CustomTextField = styled(TextField)({
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "white",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
+  });
+
   const threadId = props.threadId;
   const setThreads = props.setThreads;
-
-  // 返信フォーム情報の作成
-  useEffect(() => {
-    setFormResponses({ name: "", email: "", content: "" });
-  }, []);
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    createResponse(threadId, data);
+    reset((formValues) => ({
+      ...formValues,
+      name: "",
+      email: "",
+      content: "",
+    }));
+  };
 
   // フォーム内容送信
-  const createResponse = async (threadId) => {
+  const createResponse = async (threadId, param) => {
     axios
       .post(
         `${process.env.NEXT_PUBLIC_API_URL}/threads/${threadId}/responses`,
-        formResponses
+        param
       )
       .then((res) => {
         console.log(res);
@@ -31,49 +57,37 @@ const ThreadForm = (props) => {
       });
   };
 
-  // フォーム入力時
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormResponses((prev) => {
-      console.log(prev);
-      return { ...prev, [name]: value };
-    });
-  };
-
   return (
     <>
       <div>
-        <TextField
+        <CustomTextField
           id={`name-${threadId}`}
           name="name"
           type="text"
           size="small"
           label="名前"
-          value={formResponses.name}
-          onChange={(e) => handleChange(e)}
+          {...register("name")}
         />
-        <TextField
+        <CustomTextField
           id={`email-${threadId}`}
           name="email"
           type="text"
           size="small"
           label="メールアドレス"
-          value={formResponses.email}
-          onChange={(e) => handleChange(e)}
+          {...register("email")}
         />
       </div>
-      <TextField
+      <CustomTextField
         id={`content-${threadId}`}
         name="content"
         type="text"
         size="small"
         label="内容"
-        value={formResponses.content}
-        onChange={(e) => handleChange(e)}
+        {...register("content")}
         multiline
         rows={4}
       />
-      <button onClick={() => createResponse(threadId)}>送信</button>
+      <button onClick={handleSubmit(onSubmit)}>送信</button>
     </>
   );
 };
