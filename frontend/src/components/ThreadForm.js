@@ -1,5 +1,6 @@
 import axios from "axios";
 import { memo, useEffect, useState } from "react";
+import TextField from "@mui/material/TextField";
 
 const ThreadForm = (props) => {
   const [formResponses, setFormResponses] = useState([]);
@@ -42,31 +43,36 @@ const ThreadForm = (props) => {
   return (
     <>
       <div>
-        名前：
-        <input
+        <TextField
           id={`name-${threadId}`}
           name="name"
           type="text"
+          size="small"
+          label="名前"
           value={formResponses.name}
           onChange={(e) => handleChange(e)}
-        ></input>
-        メアド：
-        <input
+        />
+        <TextField
           id={`email-${threadId}`}
           name="email"
           type="text"
+          size="small"
+          label="メールアドレス"
           value={formResponses.email}
           onChange={(e) => handleChange(e)}
-        ></input>
+        />
       </div>
-      内容：
-      <textarea
+      <TextField
         id={`content-${threadId}`}
         name="content"
         type="text"
+        size="small"
+        label="内容"
         value={formResponses.content}
         onChange={(e) => handleChange(e)}
-      ></textarea>
+        multiline
+        rows={4}
+      />
       <button onClick={() => createResponse(threadId)}>送信</button>
     </>
   );
