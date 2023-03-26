@@ -18,6 +18,10 @@ const ThreadBox = ({ thread, children }) => {
     margin: 0;
     text-align: left;
   `;
+
+  const CustomLinkBox = styled.div`
+    margin: 10px;
+  `;
   return (
     <>
       <BaseBox beginColor={"#afb42b"} endColor={"#5f6900"} key={thread.key}>
@@ -35,9 +39,9 @@ const ThreadBox = ({ thread, children }) => {
 
         <div>{children}</div>
 
-        <div>
+        <CustomLinkBox>
           <Link href={`/threads/${thread.id}`}>全部読む</Link>
-        </div>
+        </CustomLinkBox>
       </BaseBox>
     </>
   );

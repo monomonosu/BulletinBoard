@@ -1,11 +1,31 @@
 import axios from "axios";
 import { memo } from "react";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/material";
+import emStyled from "@emotion/styled";
 
 const ThreadForm = (props) => {
+  const CustomFormContainer = emStyled.div`
+    text-align: left;
+    margin: 0 20px;
+    box-sizing:border-box;
+    width: auto;
+    display:grid;
+    gap:20px
+    `;
+
+  const FormInner = emStyled.div`
+    display:flex;
+    gap:2%;
+  `;
+
   const CustomTextField = styled(TextField)({
+    width: "40%",
+    "& label": {
+      color: "white",
+    },
     "& label.Mui-focused": {
       color: "white",
     },
@@ -13,6 +33,8 @@ const ThreadForm = (props) => {
       borderBottomColor: "white",
     },
     "& .MuiOutlinedInput-root": {
+      color: "white",
+      borderRadius: "0px",
       "& fieldset": {
         borderColor: "white",
       },
@@ -22,6 +44,24 @@ const ThreadForm = (props) => {
       "&.Mui-focused fieldset": {
         borderColor: "white",
       },
+    },
+  });
+
+  const OverRideTextField = styled(CustomTextField)({
+    width: "100%",
+  });
+
+  const CustomButton = styled(Button)({
+    height: "40px",
+    width: "16%",
+    borderColor: "white",
+    borderRadius: "0px",
+    color: "white",
+    "& .MuiButtonBase-root": {
+      borderColor: "white",
+    },
+    "&:hover": {
+      borderColor: "white",
     },
   });
 
@@ -58,8 +98,8 @@ const ThreadForm = (props) => {
   };
 
   return (
-    <>
-      <div>
+    <CustomFormContainer>
+      <FormInner>
         <CustomTextField
           id={`name-${threadId}`}
           name="name"
@@ -76,8 +116,11 @@ const ThreadForm = (props) => {
           label="メールアドレス"
           {...register("email")}
         />
-      </div>
-      <CustomTextField
+        <CustomButton variant="outlined" onClick={handleSubmit(onSubmit)}>
+          送信
+        </CustomButton>
+      </FormInner>
+      <OverRideTextField
         id={`content-${threadId}`}
         name="content"
         type="text"
@@ -87,8 +130,7 @@ const ThreadForm = (props) => {
         multiline
         rows={4}
       />
-      <button onClick={handleSubmit(onSubmit)}>送信</button>
-    </>
+    </CustomFormContainer>
   );
 };
 
