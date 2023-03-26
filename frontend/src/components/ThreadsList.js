@@ -6,7 +6,7 @@ const ThreadsList = (props) => {
     <>
       <BaseBox beginColor={"#ffbe26"} endColor={"#b54200"}>
         {threads.map((thread) => (
-          <span key={thread.key}>
+          <span key={thread.id}>
             {thread.id}: ★{thread.title}({thread.responses_count + 1})
           </span>
         ))}

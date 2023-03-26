@@ -34,7 +34,7 @@ const ThreadBox = ({ thread, children }) => {
         <ResponseBox response={firstResponse} />
 
         {thread.responses.map((response) => (
-          <ResponseBox key={response.key} response={response} />
+          <ResponseBox key={response.id} response={response} />
         ))}
 
         <div>{children}</div>
