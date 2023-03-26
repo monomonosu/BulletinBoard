@@ -1,7 +1,7 @@
 import axios from "axios";
 import { memo } from "react";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import BasicButton from "./uis/BasicButton";
 import { useForm } from "react-hook-form";
 import { styled } from "@mui/material";
 import emStyled from "@emotion/styled";
@@ -49,20 +49,6 @@ const ThreadForm = (props) => {
 
   const OverRideTextField = styled(CustomTextField)({
     width: "100%",
-  });
-
-  const CustomButton = styled(Button)({
-    height: "40px",
-    width: "16%",
-    borderColor: "white",
-    borderRadius: "0px",
-    color: "white",
-    "& .MuiButtonBase-root": {
-      borderColor: "white",
-    },
-    "&:hover": {
-      borderColor: "white",
-    },
   });
 
   const threadId = props.threadId;
@@ -116,9 +102,7 @@ const ThreadForm = (props) => {
           label="メールアドレス"
           {...register("email")}
         />
-        <CustomButton variant="outlined" onClick={handleSubmit(onSubmit)}>
-          送信
-        </CustomButton>
+        <BasicButton buttonText="送信" onClick={handleSubmit(onSubmit)} />
       </FormInner>
       <OverRideTextField
         id={`content-${threadId}`}
