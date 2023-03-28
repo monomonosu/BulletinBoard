@@ -1,4 +1,5 @@
-import { styled, Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { Button } from "@mui/material";
 
 const BasicButton = (props) => {
   const CustomButton = styled(Button)({
@@ -7,19 +8,31 @@ const BasicButton = (props) => {
     borderColor: "white",
     borderRadius: "0px",
     color: "white",
-    "& .MuiButtonBase-root": {
-      borderColor: "white",
-    },
     "&:hover": {
       borderColor: "white",
+    },
+    "&.-green": {
+      borderColor: "#5f6900",
+      color: "#5f6900",
+      "&:hover": {
+        borderColor: "#5f6900",
+      },
+    },
+    "&.-blue": {
+      borderColor: "#003b4d",
+      color: "#003b4d",
+      "&:hover": {
+        borderColor: "#003b4d",
+      },
     },
   });
 
   const buttonText = props.buttonText;
   const onClick = props.onClick;
+  const className = props.className;
   return (
     <>
-      <CustomButton variant="outlined" onClick={onClick}>
+      <CustomButton className={className} variant="outlined" onClick={onClick}>
         {buttonText}
       </CustomButton>
     </>
