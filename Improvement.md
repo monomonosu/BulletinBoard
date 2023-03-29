@@ -1,7 +1,14 @@
 # 改善すべき点
+
 ## プロジェクト作成時にTypeScript対応
+
 ## Eslint、Prettierのインストール
-## CSSライブラリはEmotionが良さげ(next.configをcompiler: {emotion: true}で使える。tsを使っている場合はtsconfigの"jsxImportSource": "@emotion/react"でエディタエラーがなくなる)
+
+## CSSライブラリはEmotionが良さげ
+### next.configをcompiler: {emotion: true}で使える。tsを使っている場合はtsconfigの"jsxImportSource": "@emotion/react"でエディタエラーがなくなる
+
+## パーツコンポーネントはデザインのみに留めた方がよさげ
+### ボタン、入力フォームなどのパーツごとのコンポーネントにはロジックを含めず、デザインのみを閉じ込めるまでに留めておいた方が後々後悔しない気がする。（多分）
 
 # 参考
 ## MUIのstyleを変更する
