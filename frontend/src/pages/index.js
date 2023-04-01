@@ -6,14 +6,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import BasicButton from "../components/uis/BasicButton";
 import Link from "next/link";
-import styled from "@emotion/styled";
 import PageLinks from "../components/layouts/PageLinks";
 
 export default function Home() {
-  const CustomLink = styled.div`
-    text-align: right;
-  `;
-
   const [threads, setThreads] = useState([]);
 
   // スレッド一覧呼び出し
