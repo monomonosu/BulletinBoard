@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   backend:
@@ -9,15 +9,20 @@ services:
       - "8080:8080"
     volumes:
       - ./backend/src:/var/www
+    command: "composer install"
   frontend:
-   build:
-     context: .
-     dockerfile: ./frontend/Dockerfile
-   volumes:
-     - ./frontend/src:/app
-   command: 'yarn dev'
-   ports:
-     - 3000:3000
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    volumes:
+      - ./frontend/src:/app
+    command: >
+      sh -c "
+      yarn install
+      yarn dev
+      "
+    ports:
+      - 80:3000
   mysql:
     image: mysql:8.0
     ports:
